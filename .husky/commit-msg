@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+export PATH="$HOME/.nvm/versions/node/v20.15.1/bin:/usr/local/bin:$PATH"
+npx --no -- commitlint --edit "$1"

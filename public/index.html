@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="pt" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Despedida da Sophie — o Nardinho responde ao quizz em vídeo!"
+    />
+    <meta name="theme-color" content="#6b8f5e" />
+    <meta property="og:title" content="Despedida da Sophie 💍" />
+    <meta
+      property="og:description"
+      content="Quizz interativo: a Sophie responde e vê o vídeo do Nardinho!"
+    />
+    <title>Despedida da Sophie 💍</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <!-- Decorative background blobs -->
+    <div class="bg-blob bg-blob--1" aria-hidden="true"></div>
+    <div class="bg-blob bg-blob--2" aria-hidden="true"></div>
+    <div class="bg-blob bg-blob--3" aria-hidden="true"></div>
+
+    <!-- Floating petals decoration -->
+    <div class="petals" aria-hidden="true">
+      <span class="petal">💍</span>
+      <span class="petal">🌸</span>
+      <span class="petal">💕</span>
+      <span class="petal">🌿</span>
+      <span class="petal">🌸</span>
+      <span class="petal">💍</span>
+      <span class="petal">🌸</span>
+      <span class="petal">💕</span>
+    </div>
+
+    <!-- Confetti canvas overlay -->
+    <canvas id="confetti-canvas" aria-hidden="true"></canvas>
+
+    <!-- Modal overlay (shared by confirm + help dialogs) -->
+    <div id="modal-overlay" class="modal-overlay" role="presentation"></div>
+
+    <!-- Help modal -->
+    <div
+      id="help-modal"
+      class="modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="help-modal-title"
+    >
+      <div class="modal-content">
+        <button class="modal-close" aria-label="Fechar ajuda">&times;</button>
+        <div class="modal-header">
+          <span class="modal-icon">📖</span>
+          <h2 id="help-modal-title">Como Jogar</h2>
+        </div>
+        <div class="modal-body">
+          <section class="help-section">
+            <h3>🎮 O Jogo</h3>
+            <p>
+              A Sophie responde a cada pergunta sobre o casal em voz alta —
+              depois vê a resposta do Nardinho em vídeo. O grupo decide se ela
+              acertou ou errou!
+            </p>
+          </section>
+          <section class="help-section">
+            <h3>❓ As Perguntas</h3>
+            <p>São 36 perguntas divididas em 4 categorias:</p>
+            <ul>
+              <li>
+                <strong>💕 Românticas</strong> — 10 perguntas fofas sobre o
+                casal
+              </li>
+              <li>
+                <strong>😂 Engraçadas</strong> — 11 momentos hilariantes entre
+                os dois
+              </li>
+              <li>
+                <strong>🥹 Emocionais</strong> — 7 memórias especiais e
+                sentimentos
+              </li>
+              <li>
+                <strong>🔥 Levemente Picantes</strong> — 8 perguntas para animar
+                a festa!
+              </li>
+            </ul>
+          </section>
+          <section class="help-section">
+            <h3>✅ Acertou / ❌ Errou</h3>
+            <p>
+              Depois de ver o vídeo, o grupo decide: clica em
+              <strong>Acertou</strong> se a Sophie disse o mesmo que o Nardinho,
+              ou <strong>Errou</strong> se as respostas foram diferentes. O jogo
+              avança automaticamente para a próxima pergunta após 2.5 segundos.
+            </p>
+          </section>
+          <section class="help-section">
+            <h3>🏆 Pontuação</h3>
+            <p>
+              Cada acerto dá <strong>+1 ponto</strong> à Sophie. Cada erro dá
+              <strong>+1 ponto</strong> ao Team Bride. Quem tiver mais pontos no
+              final ganha — e há consequências!
+            </p>
+          </section>
+          <section class="help-section">
+            <h3>🎉 Consequências</h3>
+            <ul>
+              <li>
+                <strong>Sophie ganha 💅</strong> — escolhe pessoas do grupo para
+                beber um shot e pagar um mico
+              </li>
+              <li>
+                <strong>Team Bride ganha 💒</strong> — a Sophie bebe um shot e o
+                grupo escolhe o mico
+              </li>
+              <li>
+                <strong>Empate 🤝</strong> — bebem todos um shot e decidem o
+                mico juntos
+              </li>
+            </ul>
+          </section>
+          <section class="help-section">
+            <h3>🌙 Tema Claro / Escuro</h3>
+            <p>
+              Clica no botão <strong>🌙</strong> no canto superior direito para
+              alternar entre o tema claro e escuro. A preferência é guardada
+              automaticamente.
+            </p>
+          </section>
+          <section class="help-section">
+            <h3>💾 Progresso Automático</h3>
+            <p>
+              O progresso é guardado automaticamente no browser. Se fechares a
+              página, podes continuar exatamente de onde ficaste!
+            </p>
+          </section>
+          <section class="help-section">
+            <h3>↺ Recomeçar</h3>
+            <p>
+              Clica no botão <strong>↺</strong> no canto superior direito (ou no
+              menu mobile) para começar do zero. Atenção: todo o progresso é
+              apagado!
+            </p>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <!-- Confirm dialog modal -->
+    <div
+      id="confirm-modal"
+      class="modal confirm-modal"
+      role="alertdialog"
+      aria-modal="true"
+      aria-labelledby="confirm-modal-message"
+    >
+      <div class="modal-content confirm-modal-content">
+        <p id="confirm-modal-message" class="confirm-modal-message"></p>
+        <div class="confirm-modal-actions">
+          <button class="btn btn-outline" id="confirm-cancel-btn">
+            Cancelar
+          </button>
+          <button class="btn btn-primary" id="confirm-ok-btn">
+            Sim, recomeçar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- App shell                                  -->
+    <!-- ═══════════════════════════════════════════ -->
+    <div class="app-shell">
+      <!-- Header -->
+      <header class="site-header" role="banner">
+        <div class="header-deco" aria-hidden="true">
+          <span class="deco-ring">💍</span>
+          <span class="deco-flower">🌸</span>
+          <span class="deco-heart">💕</span>
+        </div>
+
+        <div class="header-main">
+          <h1 class="site-title">
+            <span class="title-pre">Despedida da</span>
+            <span class="title-name">Sophie</span>
+          </h1>
+          <p class="site-tagline">O Nardinho responde ao quizz 💍</p>
+        </div>
+
+        <nav class="header-actions" aria-label="Controlos do quizz">
+          <button
+            class="btn btn-icon"
+            id="help-btn"
+            aria-label="Ajuda e regras do quizz"
+          >
+            <span aria-hidden="true">❓</span>
+            <span class="btn-label">Ajuda</span>
+          </button>
+          <button
+            class="btn btn-icon"
+            id="reset-btn-header"
+            aria-label="Recomeçar o quizz"
+          >
+            <span aria-hidden="true">↺</span>
+            <span class="btn-label">Recomeçar</span>
+          </button>
+          <button
+            class="btn btn-icon"
+            id="theme-toggle"
+            aria-label="Mudar tema"
+          >
+            <span class="theme-icon">🌙</span>
+          </button>
+        </nav>
+
+        <!-- Mobile controls -->
+        <div class="header-mobile-controls">
+          <button
+            class="btn btn-icon"
+            id="theme-toggle-mobile"
+            aria-label="Mudar tema"
+          >
+            <span class="theme-icon">🌙</span>
+          </button>
+          <button
+            class="header-menu-toggle"
+            id="header-menu-toggle"
+            aria-label="Abrir menu"
+            aria-expanded="false"
+            title="Menu"
+          >
+            <svg
+              class="icon-hamburger"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+            <svg
+              class="icon-close"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Mobile menu overlay -->
+        <div class="header-menu-overlay" id="header-menu-overlay"></div>
+
+        <!-- Mobile menu sidebar -->
+        <nav
+          class="header-menu-sidebar"
+          id="header-menu-sidebar"
+          aria-label="Menu do quizz"
+        >
+          <button
+            class="btn btn-icon"
+            id="help-btn-mobile"
+            aria-label="Ajuda e regras do quizz"
+          >
+            <span aria-hidden="true">❓</span>
+            <span class="btn-label">Ajuda</span>
+          </button>
+          <button
+            class="btn btn-icon"
+            id="reset-btn-mobile"
+            aria-label="Recomeçar o quizz"
+          >
+            <span aria-hidden="true">↺</span>
+            <span class="btn-label">Recomeçar</span>
+          </button>
+        </nav>
+      </header>
+
+      <!-- Progress / Score bar -->
+      <div
+        class="progress-container"
+        role="status"
+        aria-label="Pontuação atual"
+        aria-live="polite"
+      >
+        <div id="progress-bar" class="progress-bar"></div>
+      </div>
+
+      <!-- Main game area -->
+      <main class="main-content">
+        <div id="game-root" class="game-root">
+          <div class="loading-state" aria-label="A carregar o quizz...">
+            <span class="loading-spinner">🌸</span>
+          </div>
+        </div>
+      </main>
+
+      <!-- Footer -->
+      <footer class="site-footer" role="contentinfo">
+        <p>Com amor, as tuas besties 💕</p>
+      </footer>
+    </div>
+
+    <script src="app.bundle.js"></script>
+  </body>
+</html>
