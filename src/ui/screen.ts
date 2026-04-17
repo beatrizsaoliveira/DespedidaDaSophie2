@@ -273,8 +273,7 @@ export class ScreenManager {
         // Record the answer
         this.engine.recordAnswer(acertou);
 
-        // Hide the buttons, show feedback
-        resultActions.hidden = true;
+        // Keep buttons visible but disabled; show feedback
         resultFeedback.hidden = false;
 
         feedbackText.textContent = acertou

@@ -917,6 +917,16 @@ ul {
   filter: brightness(0.95);
 }
 
+.btn-acertou:disabled,
+.btn-errou:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+  transform: none;
+  filter: none;
+  box-shadow: none;
+}
+
 /* ══════════════════════════════════════════════════════════
    16. Result feedback (after answering)
    ══════════════════════════════════════════════════════════ */
