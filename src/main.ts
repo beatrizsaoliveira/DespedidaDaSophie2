@@ -32,7 +32,6 @@ function main(): void {
 
     // Mobile menu buttons
     const resetBtnMobile = document.getElementById('reset-btn-mobile');
-    const themeBtnMobile = document.getElementById('theme-toggle-mobile');
     const helpBtnMobile = document.getElementById('help-btn-mobile');
 
     helpBtnMobile?.addEventListener('click', () => {
@@ -48,10 +47,6 @@ function main(): void {
                 screen.render();
             }
         });
-    });
-
-    themeBtnMobile?.addEventListener('click', () => {
-        document.getElementById('theme-toggle')?.click();
     });
 
     // Desktop reset button
