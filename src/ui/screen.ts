@@ -180,7 +180,6 @@ export class ScreenManager {
             <video
               id="quiz-video"
               class="quiz-video"
-              controls
               playsinline
               preload="metadata"
               aria-label="Resposta do Nardinho"
@@ -188,6 +187,9 @@ export class ScreenManager {
               <source src="${this.escapeHtml(question.videoSrc)}" type="video/mp4" />
               ${t.video.videoError}
             </video>
+            <button class="video-overlay-btn" id="video-overlay-btn" data-state="hidden" aria-label="Reproduzir vídeo">
+              <span class="video-overlay-icon" id="video-overlay-icon"></span>
+            </button>
             <div class="video-error-msg" id="video-error-msg" hidden>
               <span>${t.video.videoError}</span>
             </div>
@@ -229,17 +231,62 @@ export class ScreenManager {
             'quiz-video'
         ) as HTMLVideoElement | null;
         const errorMsg = document.getElementById('video-error-msg');
+        const overlayBtn = document.getElementById(
+            'video-overlay-btn'
+        ) as HTMLButtonElement | null;
+        const overlayIcon = document.getElementById('video-overlay-icon');
 
-        if (video && errorMsg) {
-            video.addEventListener('error', () => {
-                video.hidden = true;
-                errorMsg.hidden = false;
-            });
-            // Auto-play the video
-            video.play().catch(() => {
-                // User gesture may be required; the controls attribute allows manual play
-            });
-        }
+        if (!video || !errorMsg) return;
+
+        const setOverlay = (
+            icon: string,
+            state: 'visible' | 'flash' | 'hidden'
+        ) => {
+            if (!overlayIcon || !overlayBtn) return;
+            overlayIcon.textContent = icon;
+            overlayBtn.dataset.state = state;
+        };
+
+        video.addEventListener('error', () => {
+            video.hidden = true;
+            if (overlayBtn) overlayBtn.hidden = true;
+            errorMsg.hidden = false;
+        });
+
+        video.addEventListener('play', () => {
+            setOverlay('', 'hidden');
+        });
+
+        video.addEventListener('ended', () => {
+            setOverlay('↺', 'visible');
+            if (overlayBtn)
+                overlayBtn.setAttribute('aria-label', 'Repetir vídeo');
+        });
+
+        overlayBtn?.addEventListener('click', () => {
+            if (video.ended) {
+                video.currentTime = 0;
+                video.play().catch(() => {});
+            } else if (video.paused) {
+                video.play().catch(() => {});
+            } else {
+                video.pause();
+                setOverlay('⏸', 'flash');
+                if (overlayBtn)
+                    overlayBtn.setAttribute('aria-label', 'Reproduzir vídeo');
+                setTimeout(() => {
+                    if (video.paused && !video.ended) {
+                        setOverlay('▶', 'visible');
+                    }
+                }, 600);
+            }
+        });
+
+        // Auto-play the video
+        video.play().catch(() => {
+            // Autoplay blocked — show play button so user can tap to start
+            setOverlay('▶', 'visible');
+        });
 
         const btnAcertou = document.getElementById('btn-acertou');
         const btnErrou = document.getElementById('btn-errou');

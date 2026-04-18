@@ -43,12 +43,13 @@ export const QUESTIONS: Question[] = [
         text: 'Se pudesses descrevê-la numa palavra, qual seria?',
         videoSrc: 'videos/question_06.mp4',
     },
-    {
-        id: 7,
-        category: 'romanticas',
-        text: 'Qual foi o primeiro pensamento quando a viste pela primeira vez?',
-        videoSrc: 'videos/question_07.mp4',
-    },
+    // Question not answered.
+    // {
+    //     id: 7,
+    //     category: 'romanticas',
+    //     text: 'Qual foi o primeiro pensamento quando a viste pela primeira vez?',
+    //     videoSrc: 'videos/question_07.mp4',
+    // },
     {
         id: 8,
         category: 'romanticas',
@@ -61,12 +62,13 @@ export const QUESTIONS: Question[] = [
         text: 'Como imaginas os dois daqui a 10 anos?',
         videoSrc: 'videos/question_09.mp4',
     },
-    {
-        id: 10,
-        category: 'romanticas',
-        text: 'O que te faz ter a certeza de que queres casar com ela?',
-        videoSrc: 'videos/question_10.mp4',
-    },
+    // Question not answered.
+    // {
+    //     id: 10,
+    //     category: 'romanticas',
+    //     text: 'O que te faz ter a certeza de que queres casar com ela?',
+    //     videoSrc: 'videos/question_10.mp4',
+    // },
 
     // ──────────────────────────────────────────────────────────
     // 😂 Engraçadas
@@ -131,12 +133,13 @@ export const QUESTIONS: Question[] = [
         text: 'Quem é mais dramático?',
         videoSrc: 'videos/question_20.mp4',
     },
-    {
-        id: 21,
-        category: 'engracadas',
-        text: 'Quem manda na relação? 👀',
-        videoSrc: 'videos/question_21.mp4',
-    },
+    // Question not answered.
+    // {
+    //     id: 21,
+    //     category: 'engracadas',
+    //     text: 'Quem manda na relação? 👀',
+    //     videoSrc: 'videos/question_21.mp4',
+    // },
 
     // ──────────────────────────────────────────────────────────
     // 🥹 Emocionais
@@ -153,12 +156,13 @@ export const QUESTIONS: Question[] = [
         text: 'O que aprendeste com ela?',
         videoSrc: 'videos/question_23.mp4',
     },
-    {
-        id: 24,
-        category: 'emocionais',
-        text: 'O que ela te ensinou sobre o amor?',
-        videoSrc: 'videos/question_24.mp4',
-    },
+    // Question not answered.
+    // {
+    //     id: 24,
+    //     category: 'emocionais',
+    //     text: 'O que ela te ensinou sobre o amor?',
+    //     videoSrc: 'videos/question_24.mp4',
+    // },
     {
         id: 25,
         category: 'emocionais',
@@ -177,12 +181,13 @@ export const QUESTIONS: Question[] = [
         text: 'O que mais admiras na forma como ela cuida das pessoas?',
         videoSrc: 'videos/question_27.mp4',
     },
-    {
-        id: 28,
-        category: 'emocionais',
-        text: 'O que sentes quando imaginas o casamento?',
-        videoSrc: 'videos/question_28.mp4',
-    },
+    // Question not answered.
+    // {
+    //     id: 28,
+    //     category: 'emocionais',
+    //     text: 'O que sentes quando imaginas o casamento?',
+    //     videoSrc: 'videos/question_28.mp4',
+    // },
 
     // ──────────────────────────────────────────────────────────
     // 🔥 Levemente picantes
@@ -211,12 +216,13 @@ export const QUESTIONS: Question[] = [
         text: 'Quem tomou mais iniciativa no início?',
         videoSrc: 'videos/question_32.mp4',
     },
-    {
-        id: 33,
-        category: 'picantes',
-        text: 'Qual foi o momento mais "inesquecível" só de vocês? 👀',
-        videoSrc: 'videos/question_33.mp4',
-    },
+    // Question not answered.
+    // {
+    //     id: 33,
+    //     category: 'picantes',
+    //     text: 'Qual foi o momento mais "inesquecível" só de vocês? 👀',
+    //     videoSrc: 'videos/question_33.mp4',
+    // },
     {
         id: 34,
         category: 'picantes',
@@ -229,12 +235,13 @@ export const QUESTIONS: Question[] = [
         text: 'Quem faz mais surpresas?',
         videoSrc: 'videos/question_35.mp4',
     },
-    {
-        id: 36,
-        category: 'picantes',
-        text: 'Quem é mais "grudinho"?',
-        videoSrc: 'videos/question_36.mp4',
-    },
+    // Question not answered.
+    // {
+    //     id: 36,
+    //     category: 'picantes',
+    //     text: 'Quem é mais "grudinho"?',
+    //     videoSrc: 'videos/question_36.mp4',
+    // },
 ];
 
 export const TOTAL_QUESTIONS = QUESTIONS.length;

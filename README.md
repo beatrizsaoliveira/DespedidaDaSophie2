@@ -35,14 +35,14 @@
 | **Team Bride** 💒 | Sophie takes a shot and the group picks the dare.                                  |
 | **Tie** 🤝       | Everyone takes a shot and the dare is decided together.                             |
 
-### Questions (36 total)
+### Questions (29 total)
 
 | Category               | No. |
 | ---------------------- | --- |
-| 💕 Romantic & Cute     | 10  |
-| 😂 Funny               | 11  |
-| 🥹 Emotional           | 7   |
-| 🔥 Mildly Spicy        | 8   |
+| 💕 Romantic & Cute     | 8   |
+| 😂 Funny               | 10  |
+| 🥹 Emotional           | 5   |
+| 🔥 Mildly Spicy        | 6   |
 
 ---
 
@@ -52,7 +52,7 @@
 | ----------- | ------------------------------------------------------------------------------------ |
 | **Intro**   | Cover image, title, description and "Let's go! 🎬" button                           |
 | **Question** | Category badge, counter, question text and button to watch the video                |
-| **Video**   | HTML5 player with Nardinho's response + Correct / Wrong buttons                     |
+| **Video**   | Nardinho's video (no native controls) — tap to pause/play, ↺ to replay + Correct / Wrong buttons |
 | **Result**  | Immediate feedback, point awarded, updated score — auto-advances after 2.5s  |
 | **End**     | Confetti, final scoreboard, winner and consequence message + restart button          |
 
@@ -99,7 +99,7 @@ DespedidaSophie2/
 │   │   ├── pt-PT.ts         # Active locale — Portuguese (Portugal)
 │   │   └── index.ts         # Re-exports active locale as `t`
 │   ├── game/
-│   │   ├── questions.ts     # 36 questions organised by category
+│   │   ├── questions.ts     # 29 questions organised by category (7 unanswered ones commented out)
 │   │   ├── gameState.ts     # State manager + localStorage persistence
 │   │   └── engine.ts        # Game logic and winner determination
 │   └── ui/
