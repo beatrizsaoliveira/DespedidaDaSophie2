@@ -51,7 +51,7 @@ export interface Translations {
         sophieWinsDesc: string;
         teamBrideWinsTitle: string;
         teamBrideWinsDesc: string;
-        tieTitle: string;
+        tieTitle: string; // kept for safety — not reachable with 29 questions
         tieDesc: string;
         resetAriaLabel: string;
         resetBtn: string;

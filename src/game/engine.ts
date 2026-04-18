@@ -30,7 +30,6 @@ export class GameEngine {
         const sophie = this.gameState.sophieScore;
         const bride = this.gameState.teamBrideScore;
         if (sophie > bride) return 'sophie';
-        if (bride > sophie) return 'teamBride';
-        return 'tie';
+        return 'teamBride';
     }
 }

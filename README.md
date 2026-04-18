@@ -33,7 +33,6 @@
 | ---------------- | ----------------------------------------------------------------------------------- |
 | **Sophie** 💅    | Picks as many people from the group as she wants to take a shot and do a dare.     |
 | **Team Bride** 💒 | Sophie takes **3 shots** and the group picks the dare.                             |
-| **Tie** 🤝       | Everyone takes a shot and the dare is decided together.                             |
 
 ### Questions (29 total)
 

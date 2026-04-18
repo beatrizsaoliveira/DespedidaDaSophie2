@@ -356,23 +356,15 @@ export class ScreenManager {
         const winnerTitle =
             winner === 'sophie'
                 ? t.fim.sophieWinsTitle
-                : winner === 'teamBride'
-                  ? t.fim.teamBrideWinsTitle
-                  : t.fim.tieTitle;
+                : t.fim.teamBrideWinsTitle;
 
         const winnerDesc =
             winner === 'sophie'
                 ? t.fim.sophieWinsDesc
-                : winner === 'teamBride'
-                  ? t.fim.teamBrideWinsDesc
-                  : t.fim.tieDesc;
+                : t.fim.teamBrideWinsDesc;
 
         const winnerClass =
-            winner === 'sophie'
-                ? 'winner-sophie'
-                : winner === 'teamBride'
-                  ? 'winner-bride'
-                  : 'winner-tie';
+            winner === 'sophie' ? 'winner-sophie' : 'winner-bride';
 
         this.root.innerHTML = `
       <div class="fim-card fade-in" id="fim-card" role="main">

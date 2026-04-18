@@ -6,7 +6,7 @@ export type CategoryKey =
     | 'engracadas'
     | 'emocionais'
     | 'picantes';
-export type Winner = 'sophie' | 'teamBride' | 'tie';
+export type Winner = 'sophie' | 'teamBride';
 
 export interface Question {
     id: number;
