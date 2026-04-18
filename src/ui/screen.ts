@@ -282,11 +282,8 @@ export class ScreenManager {
             }
         });
 
-        // Auto-play the video
-        video.play().catch(() => {
-            // Autoplay blocked — show play button so user can tap to start
-            setOverlay('▶', 'visible');
-        });
+        // No autoplay — always start with the play button visible
+        setOverlay('▶', 'visible');
 
         const btnAcertou = document.getElementById('btn-acertou');
         const btnErrou = document.getElementById('btn-errou');

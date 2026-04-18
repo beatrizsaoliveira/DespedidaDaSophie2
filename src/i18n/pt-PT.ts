@@ -66,7 +66,7 @@ export const ptPT: Translations = {
             'A Sophie conhece o Nardinho melhor do que ele pensa! Ela escolhe quantas pessoas quiser do grupo para beber um shot e pagar um mico à escolha dela. 💅🥂',
         teamBrideWinsTitle: '💒 O Team Bride ganhou!',
         teamBrideWinsDesc:
-            'O Team Bride conhece o Nardinho melhor do que a Sophie! A Sophie bebe um shot e o grupo escolhe o mico que ela vai pagar. 😈🥂',
+            'O Team Bride conhece o Nardinho melhor do que a Sophie! A Sophie bebe 3 shots e o grupo escolhe o mico que ela vai pagar. 😈🥂🥂🥂',
         tieTitle: '🤝 Empate!',
         tieDesc:
             'Ninguém ganhou — ou ganharam os dois! Bebem todos um shot e o mico é decidido em conjunto pelo grupo. 🥂',
