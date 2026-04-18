@@ -850,58 +850,6 @@ ul {
   font-style: italic;
 }
 
-.video-overlay-btn {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.video-overlay-icon {
-  width: 72px;
-  height: 72px;
-  border-radius: 50%;
-  background: rgba(0, 0, 0, 0.55);
-  backdrop-filter: blur(2px);
-  color: #fff;
-  font-size: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  pointer-events: none;
-  transition:
-    opacity 0.2s,
-    transform 0.2s;
-}
-
-.video-overlay-btn[data-state='visible'] .video-overlay-icon {
-  opacity: 1;
-}
-
-.video-overlay-btn[data-state='flash'] .video-overlay-icon {
-  animation: video-icon-flash 0.6s ease-out forwards;
-}
-
-@keyframes video-icon-flash {
-  0% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  100% {
-    opacity: 0;
-    transform: scale(1.5);
-  }
-}
-
 /* ══════════════════════════════════════════════════════════
    15. Result actions (Acertou / Errou buttons)
    ══════════════════════════════════════════════════════════ */

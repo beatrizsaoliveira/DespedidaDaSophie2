@@ -51,7 +51,7 @@
 | ----------- | ------------------------------------------------------------------------------------ |
 | **Intro**   | Cover image, title, description and "Let's go! 🎬" button                           |
 | **Question** | Category badge, counter, question text and button to watch the video                |
-| **Video**   | Nardinho's video (no native controls) — tap to pause/play, ↺ to replay + Correct / Wrong buttons |
+| **Video**   | Nardinho's video with native player controls + Correct / Wrong buttons                            |
 | **Result**  | Immediate feedback, point awarded, updated score — auto-advances after 2.5s  |
 | **End**     | Confetti, final scoreboard, winner and consequence message + restart button          |
 
