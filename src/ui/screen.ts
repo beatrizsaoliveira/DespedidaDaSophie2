@@ -11,58 +11,53 @@ import { showConfirm } from './confirm.js';
 type Phase = 'question' | 'video' | 'result';
 
 export class ScreenManager {
-    private gameState: GameState;
-    private engine: GameEngine;
-    private root: HTMLElement;
-    private phase: Phase = 'question';
+  private gameState: GameState;
+  private engine: GameEngine;
+  private root: HTMLElement;
+  private phase: Phase = 'question';
 
-    constructor(
-        gameState: GameState,
-        engine: GameEngine,
-        rootId = 'game-root'
-    ) {
-        this.gameState = gameState;
-        this.engine = engine;
-        const root = document.getElementById(rootId);
-        if (!root) throw new Error(`#${rootId} not found`);
-        this.root = root;
+  constructor(gameState: GameState, engine: GameEngine, rootId = 'game-root') {
+    this.gameState = gameState;
+    this.engine = engine;
+    const root = document.getElementById(rootId);
+    if (!root) throw new Error(`#${rootId} not found`);
+    this.root = root;
+  }
+
+  render(): void {
+    if (!this.gameState.hasStarted) {
+      this.renderIntro();
+      this.renderScoreBar(false);
+      return;
     }
-
-    render(): void {
-        if (!this.gameState.hasStarted) {
-            this.renderIntro();
-            this.renderScoreBar(false);
-            return;
-        }
-        if (this.gameState.isFinished) {
-            this.renderFim();
-            this.renderScoreBar(false);
-            return;
-        }
-        this.renderScoreBar(true);
-        if (this.phase === 'question') {
-            this.renderQuestion();
-        } else if (this.phase === 'video') {
-            this.renderVideo();
-        }
+    if (this.gameState.isFinished) {
+      this.renderFim();
+      this.renderScoreBar(false);
+      return;
     }
+    this.renderScoreBar(true);
+    if (this.phase === 'question') {
+      this.renderQuestion();
+    } else if (this.phase === 'video') {
+      this.renderVideo();
+    }
+  }
 
-    // ── Score bar ─────────────────────────────────────────────
+  // ── Score bar ─────────────────────────────────────────────
 
-    private renderScoreBar(show: boolean, questionIndex?: number): void {
-        const bar = document.getElementById('progress-bar');
-        if (!bar) return;
-        if (!show) {
-            bar.innerHTML = '';
-            return;
-        }
-        const sophie = this.gameState.sophieScore;
-        const bride = this.gameState.teamBrideScore;
-        const current =
-            (questionIndex ?? this.gameState.currentQuestionIndex) + 1;
-        const total = this.gameState.totalQuestions;
+  private renderScoreBar(show: boolean, questionIndex?: number): void {
+    const bar = document.getElementById('progress-bar');
+    if (!bar) return;
+    if (!show) {
+      bar.innerHTML = '';
+      return;
+    }
+    const sophie = this.gameState.sophieScore;
+    const bride = this.gameState.teamBrideScore;
+    const current = (questionIndex ?? this.gameState.currentQuestionIndex) + 1;
+    const total = this.gameState.totalQuestions;
 
-        bar.innerHTML = `
+    bar.innerHTML = `
       <div class="score-bar">
         <div class="score-team score-team--sophie ${sophie > bride ? 'score-team--leading' : ''}">
           <span class="score-label">${t.scores.sophieLabel}</span>
@@ -77,12 +72,12 @@ export class ScreenManager {
         </div>
       </div>
     `;
-    }
+  }
 
-    // ── Intro screen ──────────────────────────────────────────
+  // ── Intro screen ──────────────────────────────────────────
 
-    private renderIntro(): void {
-        this.root.innerHTML = `
+  private renderIntro(): void {
+    this.root.innerHTML = `
       <div class="intro-card fade-in" id="intro-card" role="main">
         <div class="intro-image-wrap">
           <img
@@ -105,24 +100,24 @@ export class ScreenManager {
         </div>
       </div>
     `;
-        document.getElementById('start-btn')?.addEventListener('click', () => {
-            this.gameState.startGame();
-            this.phase = 'question';
-            this.render();
-        });
-    }
+    document.getElementById('start-btn')?.addEventListener('click', () => {
+      this.gameState.startGame();
+      this.phase = 'question';
+      this.render();
+    });
+  }
 
-    // ── Question screen ───────────────────────────────────────
+  // ── Question screen ───────────────────────────────────────
 
-    private renderQuestion(): void {
-        const question = this.engine.getCurrentQuestion();
-        if (!question) return;
+  private renderQuestion(): void {
+    const question = this.engine.getCurrentQuestion();
+    if (!question) return;
 
-        const current = this.gameState.currentQuestionIndex + 1;
-        const total = this.gameState.totalQuestions;
-        const categoryLabel = t.question.categoryLabel(question.category);
+    const current = this.gameState.currentQuestionIndex + 1;
+    const total = this.gameState.totalQuestions;
+    const categoryLabel = t.question.categoryLabel(question.category);
 
-        this.root.innerHTML = `
+    this.root.innerHTML = `
       <div class="quiz-card fade-in" id="quiz-card" role="main">
         <div class="question-header">
           <span class="question-category-badge">${categoryLabel}</span>
@@ -147,25 +142,23 @@ export class ScreenManager {
       </div>
     `;
 
-        document
-            .getElementById('see-answer-btn')
-            ?.addEventListener('click', () => {
-                this.phase = 'video';
-                this.render();
-            });
-    }
+    document.getElementById('see-answer-btn')?.addEventListener('click', () => {
+      this.phase = 'video';
+      this.render();
+    });
+  }
 
-    // ── Video screen ──────────────────────────────────────────
+  // ── Video screen ──────────────────────────────────────────
 
-    private renderVideo(): void {
-        const question = this.engine.getCurrentQuestion();
-        if (!question) return;
+  private renderVideo(): void {
+    const question = this.engine.getCurrentQuestion();
+    if (!question) return;
 
-        const current = this.gameState.currentQuestionIndex + 1;
-        const total = this.gameState.totalQuestions;
-        const categoryLabel = t.question.categoryLabel(question.category);
+    const current = this.gameState.currentQuestionIndex + 1;
+    const total = this.gameState.totalQuestions;
+    const categoryLabel = t.question.categoryLabel(question.category);
 
-        this.root.innerHTML = `
+    this.root.innerHTML = `
       <div class="quiz-card fade-in" id="quiz-card" role="main">
         <div class="question-header">
           <span class="question-category-badge">${categoryLabel}</span>
@@ -221,104 +214,86 @@ export class ScreenManager {
       </div>
     `;
 
-        this.bindVideoEvents();
+    this.bindVideoEvents();
+  }
+
+  private bindVideoEvents(): void {
+    const video = document.getElementById('quiz-video') as HTMLVideoElement | null;
+    const errorMsg = document.getElementById('video-error-msg');
+
+    if (!video || !errorMsg) return;
+
+    video.addEventListener('error', () => {
+      video.hidden = true;
+      errorMsg.hidden = false;
+    });
+
+    const btnAcertou = document.getElementById('btn-acertou');
+    const btnErrou = document.getElementById('btn-errou');
+
+    btnAcertou?.addEventListener('click', () => this.handleAnswer(true));
+    btnErrou?.addEventListener('click', () => this.handleAnswer(false));
+  }
+
+  private handleAnswer(acertou: boolean): void {
+    const resultActions = document.getElementById('result-actions');
+    const resultFeedback = document.getElementById('result-feedback');
+    const feedbackText = document.getElementById('result-feedback-text');
+    const pointText = document.getElementById('result-point-text');
+    const btnAcertou = document.getElementById('btn-acertou') as HTMLButtonElement | null;
+    const btnErrou = document.getElementById('btn-errou') as HTMLButtonElement | null;
+
+    if (!resultActions || !resultFeedback || !feedbackText || !pointText) return;
+
+    // Disable both buttons immediately to prevent double-clicks
+    if (btnAcertou) btnAcertou.disabled = true;
+    if (btnErrou) btnErrou.disabled = true;
+
+    // Capture index before recordAnswer increments it
+    const questionIndex = this.gameState.currentQuestionIndex;
+
+    // Record the answer
+    this.engine.recordAnswer(acertou);
+
+    // Keep buttons visible but disabled; show feedback
+    resultFeedback.hidden = false;
+
+    feedbackText.textContent = acertou ? t.result.acertouFeedback : t.result.errouFeedback;
+    feedbackText.className = `result-feedback-text ${acertou ? 'result-feedback-text--acertou' : 'result-feedback-text--errou'}`;
+    pointText.textContent = acertou ? t.result.sophiePoint : t.result.teamBridePoint;
+
+    // Update scores but keep the counter on the current question
+    this.renderScoreBar(true, questionIndex);
+
+    // Pulse the card
+    const card = document.getElementById('quiz-card');
+    if (card) pulseElement(card);
+
+    if (acertou) {
+      launchConfetti(2500);
     }
 
-    private bindVideoEvents(): void {
-        const video = document.getElementById(
-            'quiz-video'
-        ) as HTMLVideoElement | null;
-        const errorMsg = document.getElementById('video-error-msg');
+    // Auto-advance after showing feedback
+    setTimeout(() => {
+      this.phase = 'question';
+      this.render();
+    }, 2500);
+  }
 
-        if (!video || !errorMsg) return;
+  // ── Final screen ──────────────────────────────────────────
 
-        video.addEventListener('error', () => {
-            video.hidden = true;
-            errorMsg.hidden = false;
-        });
+  private renderFim(): void {
+    const sophieScore = this.gameState.sophieScore;
+    const brideScore = this.gameState.teamBrideScore;
+    const winner = this.engine.getWinner();
 
-        const btnAcertou = document.getElementById('btn-acertou');
-        const btnErrou = document.getElementById('btn-errou');
+    const winnerTitle = winner === 'sophie' ? t.fim.sophieWinsTitle : t.fim.teamBrideWinsTitle;
 
-        btnAcertou?.addEventListener('click', () => this.handleAnswer(true));
-        btnErrou?.addEventListener('click', () => this.handleAnswer(false));
-    }
+    const winnerDesc = winner === 'sophie' ? t.fim.sophieWinsDesc : t.fim.teamBrideWinsDesc;
 
-    private handleAnswer(acertou: boolean): void {
-        const resultActions = document.getElementById('result-actions');
-        const resultFeedback = document.getElementById('result-feedback');
-        const feedbackText = document.getElementById('result-feedback-text');
-        const pointText = document.getElementById('result-point-text');
-        const btnAcertou = document.getElementById(
-            'btn-acertou'
-        ) as HTMLButtonElement | null;
-        const btnErrou = document.getElementById(
-            'btn-errou'
-        ) as HTMLButtonElement | null;
+    const winnerClass = winner === 'sophie' ? 'winner-sophie' : 'winner-bride';
 
-        if (!resultActions || !resultFeedback || !feedbackText || !pointText)
-            return;
-
-        // Disable both buttons immediately to prevent double-clicks
-        if (btnAcertou) btnAcertou.disabled = true;
-        if (btnErrou) btnErrou.disabled = true;
-
-        // Capture index before recordAnswer increments it
-        const questionIndex = this.gameState.currentQuestionIndex;
-
-        // Record the answer
-        this.engine.recordAnswer(acertou);
-
-        // Keep buttons visible but disabled; show feedback
-        resultFeedback.hidden = false;
-
-        feedbackText.textContent = acertou
-            ? t.result.acertouFeedback
-            : t.result.errouFeedback;
-        feedbackText.className = `result-feedback-text ${acertou ? 'result-feedback-text--acertou' : 'result-feedback-text--errou'}`;
-        pointText.textContent = acertou
-            ? t.result.sophiePoint
-            : t.result.teamBridePoint;
-
-        // Update scores but keep the counter on the current question
-        this.renderScoreBar(true, questionIndex);
-
-        // Pulse the card
-        const card = document.getElementById('quiz-card');
-        if (card) pulseElement(card);
-
-        if (acertou) {
-            launchConfetti(2500);
-        }
-
-        // Auto-advance after showing feedback
-        setTimeout(() => {
-            this.phase = 'question';
-            this.render();
-        }, 2500);
-    }
-
-    // ── Final screen ──────────────────────────────────────────
-
-    private renderFim(): void {
-        const sophieScore = this.gameState.sophieScore;
-        const brideScore = this.gameState.teamBrideScore;
-        const winner = this.engine.getWinner();
-
-        const winnerTitle =
-            winner === 'sophie'
-                ? t.fim.sophieWinsTitle
-                : t.fim.teamBrideWinsTitle;
-
-        const winnerDesc =
-            winner === 'sophie'
-                ? t.fim.sophieWinsDesc
-                : t.fim.teamBrideWinsDesc;
-
-        const winnerClass =
-            winner === 'sophie' ? 'winner-sophie' : 'winner-bride';
-
-        this.root.innerHTML = `
+    this.root.innerHTML = `
       <div class="fim-card fade-in" id="fim-card" role="main">
         <div class="fim-confetti-text">${t.fim.confettiEmoji}</div>
         <h2 class="fim-title">${t.fim.title}</h2>
@@ -350,32 +325,32 @@ export class ScreenManager {
       </div>
     `;
 
-        launchConfetti(6000);
-        this.bindFimActions();
-    }
+    launchConfetti(6000);
+    this.bindFimActions();
+  }
 
-    private bindFimActions(): void {
-        const resetBtn = document.getElementById('reset-btn');
-        resetBtn?.addEventListener('click', () => {
-            void showConfirm(t.confirm.resetHeader).then((ok) => {
-                if (ok) {
-                    this.gameState.reset();
-                    this.phase = 'question';
-                    this.render();
-                }
-            });
-        });
-    }
+  private bindFimActions(): void {
+    const resetBtn = document.getElementById('reset-btn');
+    resetBtn?.addEventListener('click', () => {
+      void showConfirm(t.confirm.resetHeader).then((ok) => {
+        if (ok) {
+          this.gameState.reset();
+          this.phase = 'question';
+          this.render();
+        }
+      });
+    });
+  }
 
-    // ── Utilities ─────────────────────────────────────────────
+  // ── Utilities ─────────────────────────────────────────────
 
-    /** Escapes user-facing text before injecting into innerHTML */
-    private escapeHtml(text: string): string {
-        return text
-            .replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;')
-            .replace(/"/g, '&quot;')
-            .replace(/'/g, '&#039;');
-    }
+  /** Escapes user-facing text before injecting into innerHTML */
+  private escapeHtml(text: string): string {
+    return text
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
 }
